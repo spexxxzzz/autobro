@@ -268,7 +268,7 @@ function LoginContent() {
                     {registrationEmail || 'your email address'}
                   </p>
 
-                  <div className="bg-green-50 dark:bg-green-950/20 border border-green-100 dark:border-green-900/50 rounded-lg p-6 mb-8 max-w-md w-full">
+                  <div className="bg-green-50 dark:bg-green-9/20 border border-green-100 dark:border-green-900/50 rounded-lg p-6 mb-8 max-w-md w-full">
                     <p className="text-sm text-green-800 dark:text-green-400 leading-relaxed">
                       Click the link in the email to activate your account. If
                       you don't see the email, check your spam folder.

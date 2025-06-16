@@ -164,7 +164,7 @@ export const Examples = ({
   return (
     <div className="w-full max-w-3xl mx-auto px-4">
       <div className="flex justify-between items-center mb-3">
-        <span className="text-xs text-muted-foreground font-medium">Quick starts</span>
+        <span className="text-xs text-muted-foreground font-medium">Try it out:</span>
         <Button
           variant="ghost"
           size="sm"
@@ -173,7 +173,7 @@ export const Examples = ({
         >
           <motion.div
             animate={{ rotate: isRefreshing ? 360 : 0 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
+            transition={{ duration: 1, ease: "easeInOut" }}
           >
             <RefreshCw size={10} />
           </motion.div>
@@ -186,7 +186,7 @@ export const Examples = ({
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{
-              duration: 0.3,
+              duration: 1,
               delay: index * 0.05,
               ease: "easeOut"
             }}

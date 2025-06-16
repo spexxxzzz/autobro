@@ -47,17 +47,17 @@ export function MaintenancePage() {
 
           <p className="text-muted-foreground">
             {isLocalMode() ? (
-              "The backend server appears to be offline. Please check that your backend server is running."
+              "We are currently facing a huge traffic. Please be back after some time. Thank you for your patience!"
             ) : (
               "We're currently performing maintenance on our systems. Our team is working to get everything back up and running as soon as possible."
             )}
           </p>
 
           <Alert className="mt-6">
-            <AlertTitle>Agent Executions Stopped</AlertTitle>
+            <AlertTitle>Servers Running at Maximum Capacity</AlertTitle>
             <AlertDescription>
               {isLocalMode() ? (
-                "The backend server needs to be running for agent executions to work. Please start the backend server and try again."
+                "Services are temporarily paused due to high traffic. We will resume it shortly. We know this is not ideal."
               ) : (
                 "Any running agent executions have been stopped during maintenance. You'll need to manually continue these executions once the system is back online."
               )}

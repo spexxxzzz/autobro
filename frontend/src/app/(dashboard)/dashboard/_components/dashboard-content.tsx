@@ -192,7 +192,7 @@ export function DashboardContent() {
           <div className="flex flex-col items-center text-center w-full">
             <div className="flex items-center gap-1">
               <h1 className="tracking-tight text-4xl text-muted-foreground leading-tight">
-                Hey, I am
+                Hi, I am
               </h1>
               <AgentSelector 
                 selectedAgentId={selectedAgentId}
@@ -200,8 +200,8 @@ export function DashboardContent() {
                 variant="heading"
               />
             </div>
-            <p className="tracking-tight text-3xl font-normal text-muted-foreground/80 mt-2">
-              What would you like to do today?
+            <p className="tracking-tight text-4xl text-muted-foreground/80 mt-2">
+              Your AI WorkAgent
             </p>
           </div>
           
@@ -214,7 +214,7 @@ export function DashboardContent() {
               ref={chatInputRef}
               onSubmit={handleSubmit}
               loading={isSubmitting}
-              placeholder="Describe what you need help with..."
+              placeholder="Any specific work in your mind? I'll do it"
               value={inputValue}
               onChange={setInputValue}
               hideAttachments={false}
