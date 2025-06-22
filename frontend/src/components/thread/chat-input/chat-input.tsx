@@ -17,6 +17,12 @@ import { useModelSelection } from './_use-model-selection';
 import { AgentSelector } from './agent-selector';
 import { useFileDelete } from '@/hooks/react-query/files';
 import { useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
+
+const QUERY_COUNT_STORAGE_KEY = '-query-count';
+const MAX_QUERIES = 5;
+const MAX_PROMPT_LENGTH = 300;
+const MAX_FILES = 2;
 
 export interface ChatInputHandles {
   getPendingFiles: () => File[];
@@ -87,6 +93,7 @@ export const ChatInput = forwardRef<ChatInputHandles, ChatInputProps>(
     const [pendingFiles, setPendingFiles] = useState<File[]>([]);
     const [isUploading, setIsUploading] = useState(false);
     const [isDraggingOver, setIsDraggingOver] = useState(false);
+    const [queryCount, setQueryCount] = useState<number>(0);
 
     const {
       selectedModel,
@@ -104,6 +111,8 @@ export const ChatInput = forwardRef<ChatInputHandles, ChatInputProps>(
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
 
+    
+
     useImperativeHandle(ref, () => ({
       getPendingFiles: () => pendingFiles,
       clearPendingFiles: () => setPendingFiles([]),
@@ -115,6 +124,13 @@ export const ChatInput = forwardRef<ChatInputHandles, ChatInputProps>(
       }
     }, [autoFocus]);
 
+    useEffect(() => {
+      const storedCount = localStorage.getItem(QUERY_COUNT_STORAGE_KEY);
+      if (storedCount) {
+        setQueryCount(parseInt(storedCount, 10));
+      }
+    }, []);
+
     const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
       if (
@@ -123,6 +139,13 @@ export const ChatInput = forwardRef<ChatInputHandles, ChatInputProps>(
         (disabled && !isAgentRunning)
       )
         return;
+
+      if (queryCount >= MAX_QUERIES) {
+        toast.error('Query Limit Reached', {
+          description: `You have used all ${MAX_QUERIES} of your available queries.`,
+        });
+        return;
+      }
 
       if (isAgentRunning && onStopAgent) {
         onStopAgent();
@@ -145,6 +168,10 @@ export const ChatInput = forwardRef<ChatInputHandles, ChatInputProps>(
         thinkingEnabled = true;
       }
 
+      const newCount = queryCount + 1;
+      setQueryCount(newCount);
+      localStorage.setItem(QUERY_COUNT_STORAGE_KEY, newCount.toString());
+
       onSubmit(message, {
         model_name: baseModelName,
         enable_thinking: thinkingEnabled,
@@ -158,7 +185,7 @@ export const ChatInput = forwardRef<ChatInputHandles, ChatInputProps>(
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      const newValue = e.target.value;
+      const newValue = e.target.value.slice(0, MAX_PROMPT_LENGTH);
       if (isControlled) {
         controlledOnChange(newValue);
       } else {
@@ -168,7 +195,10 @@ export const ChatInput = forwardRef<ChatInputHandles, ChatInputProps>(
 
     const handleTranscription = (transcribedText: string) => {
       const currentValue = isControlled ? controlledValue : uncontrolledValue;
-      const newValue = currentValue ? `${currentValue} ${transcribedText}` : transcribedText;
+      const combinedValue = currentValue
+        ? `${currentValue} ${transcribedText}`
+        : transcribedText;
+      const newValue = combinedValue.slice(0, MAX_PROMPT_LENGTH);
 
       if (isControlled) {
         controlledOnChange(newValue);
@@ -237,8 +267,25 @@ export const ChatInput = forwardRef<ChatInputHandles, ChatInputProps>(
 
             if (fileInputRef.current && e.dataTransfer.files.length > 0) {
               const files = Array.from(e.dataTransfer.files);
+              const remainingSlots = MAX_FILES - uploadedFiles.length;
+
+              if (remainingSlots <= 0) {
+                toast.error('File limit reached', {
+                  description: `You can only attach a maximum of ${MAX_FILES} files.`,
+                });
+                return;
+              }
+
+              let filesToUpload = files;
+              if (files.length > remainingSlots) {
+                toast.warning('Some files were not added', {
+                  description: `You tried to add ${files.length} files, but only ${remainingSlots} could be added to stay within the ${MAX_FILES} file limit.`,
+                });
+                filesToUpload = files.slice(0, remainingSlots);
+              }
+
               handleFiles(
-                files,
+                filesToUpload,
                 sandboxId,
                 setPendingFiles,
                 setUploadedFiles,
@@ -288,6 +335,12 @@ export const ChatInput = forwardRef<ChatInputHandles, ChatInputProps>(
                 subscriptionStatus={subscriptionStatus}
                 canAccessModel={canAccessModel}
                 refreshCustomModels={refreshCustomModels}
+                queryCount={queryCount}
+                maxQueries={MAX_QUERIES}
+                characterCount={value.length}
+                maxCharacters={MAX_PROMPT_LENGTH}
+                fileCount={uploadedFiles.length}
+                maxFiles={MAX_FILES}
               />
             </CardContent>
           </div>

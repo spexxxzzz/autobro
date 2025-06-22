@@ -361,12 +361,12 @@ def collect_llm_api_keys():
                     
                     model_choice = input("Select default model (1-3) or press Enter for gemini-2.5-flash: ").strip()
                     if not model_choice or model_choice == '1':
-                        model_info['default_model'] = 'openrouter/google/gemini-2.5-flash-preview'
+                        model_info['default_model'] = 'openrouter/google/gemini-2.5-flash-preview-05-20:thinking'
                     elif model_choice.isdigit() and 1 <= int(model_choice) <= len(model_aliases['OPENROUTER']):
                         model_info['default_model'] = model_aliases['OPENROUTER'][int(model_choice) - 1]
                     else:
-                        model_info['default_model'] = 'openrouter/google/gemini-2.5-flash-preview'
-                        print_warning(f"Invalid selection, using default: openrouter/google/gemini-2.5-flash-preview")
+                        model_info['default_model'] = 'openrouter/google/gemini-2.5-flash-preview-05-20:thinking'
+                        print_warning(f"Invalid selection, using default: openrouter/google/gemini-2.5-flash-preview-05-20:thinking")
                     break
                 print_error("Invalid API key format. It should be at least 10 characters long.")
         
@@ -377,7 +377,7 @@ def collect_llm_api_keys():
         elif 'OPENAI_API_KEY' in api_keys:
             model_info['default_model'] = 'openai/gpt-4o'
         elif 'OPENROUTER_API_KEY' in api_keys:
-            model_info['default_model'] = 'openrouter/google/gemini-2.5-flash-preview'
+            model_info['default_model'] = 'openrouter/google/gemini-2.5-flash-preview-05-20:thinking'
     
     print_success(f"Using {model_info['default_model']} as the default model")
     

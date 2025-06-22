@@ -27,7 +27,7 @@ export function SecondBentoAnimation() {
           <OrbitingCircles index={1} iconSize={60} speed={0.5}>
             <Icons.workos />
             <Icons.runwayml />
-            <Icons.gemini />
+            <Icons.gemini/>
           </OrbitingCircles>
 
           <OrbitingCircles

@@ -41,6 +41,12 @@ interface MessageInputProps {
   subscriptionStatus: SubscriptionStatus;
   canAccessModel: (modelId: string) => boolean;
   refreshCustomModels?: () => void;
+  queryCount: number;
+  maxQueries: number;
+  characterCount: number;
+  maxCharacters: number;
+  fileCount: number;
+  maxFiles: number;
 }
 
 export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
@@ -73,6 +79,12 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
       subscriptionStatus,
       canAccessModel,
       refreshCustomModels,
+      queryCount,
+      maxQueries,
+      characterCount,
+      maxCharacters,
+      fileCount,
+      maxFiles,
     },
     ref,
   ) => {
@@ -121,6 +133,7 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
             onChange={onChange}
             onKeyDown={handleKeyDown}
             placeholder={placeholder}
+            maxLength={maxCharacters}
             className={cn(
               'w-full bg-transparent dark:bg-transparent border-none shadow-none focus-visible:ring-0 px-2 py-1 text-base min-h-[40px] max-h-[200px] overflow-y-auto resize-none',
               isDraggingOver ? 'opacity-40' : '',
@@ -145,6 +158,8 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
                 setUploadedFiles={setUploadedFiles}
                 setIsUploading={setIsUploading}
                 messages={messages}
+                fileCount={fileCount}
+                maxFiles={maxFiles}
               />
             )}
             <VoiceRecorder
@@ -174,6 +189,17 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
               canAccessModel={canAccessModel}
               refreshCustomModels={refreshCustomModels}
             />
+            <p
+              className={cn(
+                'text-xs text-muted-foreground whitespace-nowrap',
+                characterCount === maxCharacters ? 'font-bold text-red-500' : '',
+              )}
+            >
+              {characterCount}/{maxCharacters}
+            </p>
+            <p className="text-xs text-muted-foreground whitespace-nowrap">
+              {queryCount}/{maxQueries}
+            </p>
             <Button
               type="submit"
               onClick={isAgentRunning && onStopAgent ? onStopAgent : onSubmit}
@@ -188,6 +214,7 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
                   : '',
               )}
               disabled={
+                queryCount >= maxQueries ||
                 (!value.trim() && uploadedFiles.length === 0 && !isAgentRunning) ||
                 loading ||
                 (disabled && !isAgentRunning)

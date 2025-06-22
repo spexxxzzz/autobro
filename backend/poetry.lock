@@ -698,6 +698,7 @@ files = [
 ]
 
 [package.dependencies]
+pika = {version = ">=1.0,<2.0", optional = true, markers = "extra == \"rabbitmq\""}
 prometheus-client = ">=0.2"
 
 [package.extras]
@@ -3904,4 +3905,4 @@ testing = ["coverage[toml]", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.11"
-content-hash = "99368309d41431f2104a182b680e9361409121e7a6df3ead3f14173dbaf9d066"
+content-hash = "a233dcdf1b0b2dbd81cf358c6419f769b51355491fba2d91aab8ca11765bdaa8"

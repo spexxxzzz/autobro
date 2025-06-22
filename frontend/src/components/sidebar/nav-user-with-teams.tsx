@@ -280,19 +280,19 @@ export function NavUserWithTeams({
 
               {/* User Settings Section */}
               <DropdownMenuGroup>
-                <DropdownMenuItem asChild>
+                {/* <DropdownMenuItem asChild>
                   <Link href="/settings/billing">
                     <CreditCard className="h-4 w-4" />
                     Billing
                   </Link>
-                </DropdownMenuItem>
+                </DropdownMenuItem> */}
                 {/* <DropdownMenuItem asChild>
                   <Link href="/settings">
                     <Settings className="mr-2 h-4 w-4" />
                     Settings
                   </Link>
                 </DropdownMenuItem> */}
-                <DropdownMenuItem
+                {/* <DropdownMenuItem
                   onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
                 >
                   <div className="flex items-center gap-2">
@@ -300,7 +300,7 @@ export function NavUserWithTeams({
                     <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
                     <span>Theme</span>
                   </div>
-                </DropdownMenuItem>
+                </DropdownMenuItem> */}
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuItem className='text-destructive focus:text-destructive focus:bg-destructive/10' onClick={handleLogout}>

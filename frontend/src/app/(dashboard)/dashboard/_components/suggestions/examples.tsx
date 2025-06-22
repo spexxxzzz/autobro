@@ -36,102 +36,122 @@ type PromptExample = {
 const allPrompts: PromptExample[] = [
   {
     title: 'Market research dashboard',
-    query: 'Create a comprehensive market research dashboard analyzing industry trends, customer segments, and competitive landscape. Include data visualization and actionable recommendations.',
+    query:
+      'Build an interactive market research dashboard for the SaaS industry using Python and Plotly. Analyze industry trends from top sources, segment customers from `customers.csv` using K-Means, and profile 5 key competitors. Conclude with three actionable recommendations for a new market entrant.',
     icon: <BarChart3 className="text-green-700 dark:text-green-400" size={16} />,
   },
   {
     title: 'Recommendation engine',
-    query: 'Develop a recommendation engine for personalized product suggestions. Include collaborative filtering, content-based filtering, and hybrid approaches with evaluation metrics.',
+    query:
+      'Create a hybrid e-commerce recommendation engine in Python. Use collaborative filtering (SVD) on `ratings.csv` and content-based filtering (TF-IDF) on `products.csv`. Evaluate both models, combine them, and serve the top 10 recommendations for a user via a simple Flask API endpoint.',
     icon: <Bot className="text-blue-700 dark:text-blue-400" size={16} />,
   },
   {
     title: 'Go-to-market strategy',
-    query: 'Develop a comprehensive go-to-market strategy for a new product. Include market sizing, customer acquisition channels, pricing strategy, and launch timeline.',
+    query:
+      'Create a 12-month go-to-market strategy in Markdown for a new B2B project management SaaS. Include market sizing (TAM, SAM, SOM), user personas, acquisition channels (SEO, paid ads), a three-tiered pricing model, and a detailed launch timeline with key marketing and product milestones.',
     icon: <Briefcase className="text-rose-700 dark:text-rose-400" size={16} />,
   },
   {
     title: 'Data pipeline automation',
-    query: 'Create an automated data pipeline for ETL processes. Include data validation, error handling, monitoring, and scalable architecture design.',
+    query:
+      'Build a daily ETL pipeline using Python and Airflow. Extract data from PostgreSQL, Salesforce, and Google Analytics. Transform it by cleaning, joining sources, and validating with Great Expectations. Load the final model into Snowflake or BigQuery. Ensure robust error handling and email alerts.',
     icon: <Settings className="text-purple-700 dark:text-purple-400" size={16} />,
   },
   {
     title: 'Productivity system',
-    query: 'Design a comprehensive personal productivity system including task management, goal tracking, habit formation, and time blocking. Create templates and workflows for daily, weekly, and monthly planning.',
+    query:
+      "Design a personal productivity system based on the PARA method. Create the directory structure and a detailed Markdown guide. The guide should cover task management workflows, goal tracking with OKR templates, a habit scorecard, and a time-blocking strategy. Provide all templates as MD files.",
     icon: <Target className="text-orange-700 dark:text-orange-400" size={16} />,
   },
   {
     title: 'Content marketing plan',
-    query: 'Develop a 6-month content marketing strategy including blog posts, social media, email campaigns, and SEO optimization. Include content calendar and performance metrics.',
+    query:
+      'Create a 6-month content marketing plan in a PDF for an eco-friendly home goods startup. Define 2 target personas and 4 content pillars. Build a weekly content calendar with topics, formats, and keywords. Include a list of 50 SEO keywords, define performance KPIs, and write a sample blog post.',
     icon: <PenTool className="text-indigo-700 dark:text-indigo-400" size={16} />,
   },
   {
     title: 'Portfolio analysis',
-    query: 'Create a personal investment portfolio analysis tool with risk assessment, diversification recommendations, and performance tracking against market benchmarks.',
+    query:
+      'Build a portfolio analysis web app with Python and Streamlit. Users will upload a CSV of transactions. The app must fetch live prices with yfinance, calculate portfolio value and risk (Beta), and visualize asset allocation. Plot performance against the S&P 500 and recommend rebalancing.',
     icon: <DollarSign className="text-emerald-700 dark:text-emerald-400" size={16} />,
   },
   {
     title: 'Customer journey map',
-    query: 'Map the complete customer journey from awareness to advocacy. Include touchpoints, pain points, emotions, and optimization opportunities at each stage.',
+    query:
+      'Create a customer journey map for a meditation app using Mermaid.js. The map and a report should detail 5 stages: Awareness, Consideration, Conversion, Retention, and Advocacy. For each stage, define user actions, touchpoints, emotions, pain points, and suggest optimization opportunities.',
     icon: <Users className="text-cyan-700 dark:text-cyan-400" size={16} />,
   },
   {
     title: 'A/B testing framework',
-    query: 'Design a comprehensive A/B testing framework including hypothesis formation, statistical significance calculations, and result interpretation guidelines.',
+    query:
+      'Create a PDF guide for an A/B testing framework. Cover hypothesis formulation, test design with sample size calculation, and statistical significance using p-values. Include a Python script for analysis, a guide on interpreting results, and a comparison of tools like Google Optimize and VWO.',
     icon: <TrendingUp className="text-teal-700 dark:text-teal-400" size={16} />,
   },
   {
     title: 'Code review automation',
-    query: 'Create an automated code review system that checks for security vulnerabilities, performance issues, and coding standards. Include integration with CI/CD pipelines.',
+    query:
+      'Create a GitHub Actions workflow (`.yml` file) for automated code review on pull requests. The workflow must run a security scan with Snyk or Trivy, perform performance linting with pylint/eslint, and enforce coding standards with Black/Prettier. Post a summary comment on the PR.',
     icon: <Code className="text-violet-700 dark:text-violet-400" size={16} />,
   },
   {
     title: 'Risk assessment matrix',
-    query: 'Develop a comprehensive risk assessment framework for business operations including risk identification, probability analysis, impact evaluation, and mitigation strategies.',
+    query:
+      'Develop a risk assessment framework for a small business. Deliver a Markdown guide on identifying, analyzing (with a 5x5 matrix), and prioritizing risks. Also provide a reusable Excel template with formulas for a risk matrix heat map and include a section on mitigation strategies.',
     icon: <Shield className="text-red-700 dark:text-red-400" size={16} />,
   },
   {
     title: 'Learning path generator',
-    query: 'Create a personalized learning path generator that adapts to individual goals, current skill level, and preferred learning style. Include progress tracking and resource recommendations.',
+    query:
+      'Build a Python CLI application that generates a personalized learning path. Prompt the user for their goal (e.g., Web Development), skill level, and preferred learning style. The script should output a weekly plan in Markdown with curated links to courses, videos, and articles.',
     icon: <Brain className="text-pink-700 dark:text-pink-400" size={16} />,
   },
   {
     title: 'Social media automation',
-    query: 'Design a social media automation system including content scheduling, engagement tracking, hashtag optimization, and performance analytics across multiple platforms.',
+    query:
+      'Build a social media automation tool for Twitter using Python. Create a script to schedule posts from a CSV file. Write a second script that runs daily to track engagement analytics (followers, impressions) and emails a summary report using smtplib. Provide setup instructions in a README.',
     icon: <Globe className="text-blue-600 dark:text-blue-300" size={16} />,
   },
   {
     title: 'Health tracking dashboard',
-    query: 'Build a comprehensive health tracking dashboard integrating fitness data, nutrition logging, sleep patterns, and medical records with actionable insights and goal setting.',
+    query:
+      'Create a personal health dashboard with Python and Streamlit from a user-uploaded CSV (`date`, `steps`, `calories`, `sleep`, `weight`). Visualize weight trends, daily steps vs. calories, and sleep patterns. Include a weekly report with avg/min/max for each metric. Deliver one Python file.',
     icon: <Heart className="text-red-600 dark:text-red-300" size={16} />,
   },
   {
     title: 'Project automation',
-    query: 'Create an intelligent project management system with automatic task assignment, deadline tracking, resource allocation, and team communication integration.',
+    query:
+      'Write a Python script to automate project management tasks using the Jira, Asana, or Trello API. When a new task is labeled "Urgent," it should auto-assign to a senior member, set a 48-hour due date, post a notification to Slack, and add a confirmation comment to the task.',
     icon: <Calendar className="text-amber-700 dark:text-amber-400" size={16} />,
   },
   {
     title: 'Sales funnel optimizer',
-    query: 'Analyze and optimize the entire sales funnel from lead generation to conversion. Include lead scoring, nurture sequences, and conversion rate optimization strategies.',
+    query:
+      'Analyze a SaaS sales funnel using `sales_data.csv`. Calculate and visualize conversion rates for each stage with Plotly. Perform a cohort analysis to track monthly performance. Based on the data, propose three A/B test hypotheses to improve conversions. Deliver a detailed Jupyter Notebook.',
     icon: <Zap className="text-yellow-600 dark:text-yellow-300" size={16} />,
   },
   {
     title: 'Startup pitch deck',
-    query: 'Generate a compelling startup pitch deck including problem statement, solution overview, market analysis, business model, financial projections, and funding requirements.',
+    query:
+      'Create a 12-slide pitch deck in PowerPoint for "ConnectSphere," a social network for remote workers. The deck should cover the problem, solution, market size, product demo, business model (freemium), GTM strategy, competition, team, financial projections, and the funding ask.',
     icon: <Rocket className="text-orange-600 dark:text-orange-300" size={16} />,
   },
   {
     title: 'Photography workflow',
-    query: 'Design an end-to-end photography workflow including shoot planning, file organization, editing presets, client delivery, and portfolio management systems.',
+    query:
+      'Create a PDF guide detailing a wedding photography workflow. Cover pre-shoot prep, on-site data management, file ingest and culling in Lightroom, non-destructive editing with presets, exporting for web and print, client delivery via a gallery service, and long-term archiving with the 3-2-1 rule.',
     icon: <Camera className="text-slate-700 dark:text-slate-400" size={16} />,
   },
   {
     title: 'Supply chain analysis',
-    query: 'Create a supply chain optimization analysis including vendor evaluation, cost reduction opportunities, risk mitigation, and inventory management strategies.',
+    query:
+      'Analyze `inventory_data.xlsx` for a retail supply chain report. Evaluate and rank vendors based on lead time and cost. Identify cost-reduction opportunities for high-cost products, recommend backup suppliers to mitigate risk, and calculate the EOQ for top SKUs. Deliver a PDF with visualizations.',
     icon: <Briefcase className="text-stone-700 dark:text-stone-400" size={16} />,
   },
   {
     title: 'UX research framework',
-    query: 'Develop a comprehensive UX research framework including user interviews, usability testing, persona development, and data-driven design recommendations.',
+    query:
+      'Create a "UX Research Playbook" with Markdown templates. Include a guide to research methods (interviews, usability tests), and templates for user personas, interview scripts, usability test plans, and presenting findings. Also include a guide on how to analyze data with an affinity map.',
     icon: <Sparkles className="text-fuchsia-700 dark:text-fuchsia-400" size={16} />,
   },
 ];

@@ -276,12 +276,12 @@ function LoginContent() {
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-4 w-full max-w-sm">
-                    <Link
+                    {/* <Link
                       href="/"
                       className="flex h-12 items-center justify-center w-full text-center rounded-full border border-border bg-background hover:bg-accent/20 transition-all"
                     >
                       Return to home
-                    </Link>
+                    </Link> */}
                     <button
                       onClick={resetRegistrationSuccess}
                       className="flex h-12 items-center justify-center w-full text-center rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-md"
@@ -355,22 +355,25 @@ function LoginContent() {
 
             {/* Header content */}
             <div className="relative z-10 pt-24 pb-8 max-w-md mx-auto h-full w-full flex flex-col gap-2 items-center justify-center">
-              <Link
-                href="/"
-                className="group border border-border/50 bg-background hover:bg-accent/20 rounded-full text-sm h-8 px-3 flex items-center gap-2 transition-all duration-200 shadow-sm mb-6"
-              >
-                <ArrowLeft className="h-4 w-4 text-muted-foreground" />
-                <span className="font-medium text-muted-foreground text-xs tracking-wide">
+              <div className="absolute left-8 top-8">
+                {/* <Link
+                  href="/"
+                  className={cn(
+                    buttonVariants({ variant: 'ghost' }),
+                    'self-start text-sm'
+                  )}
+                >
+                  <ChevronLeft className="mr-2 h-4 w-4" />
                   Back to home
-                </span>
-              </Link>
+                </Link> */}
+              </div>
 
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium tracking-tighter text-center text-balance text-primary">
-                {isSignUp ? 'Join Suna' : 'Welcome back'}
+                {isSignUp ? 'Join AutoBro' : 'Welcome back'}
               </h1>
               <p className="text-base md:text-lg text-center text-muted-foreground font-medium text-balance leading-relaxed tracking-tight mt-2 mb-6">
                 {isSignUp
-                  ? 'Create your account and start building with AI'
+                  ? 'Create your account and start working with AutoBro'
                   : 'Sign in to your account to continue'}
               </p>
             </div>
@@ -492,16 +495,22 @@ function LoginContent() {
                 )}
               </form>
 
-              <div className="mt-8 text-center text-xs text-muted-foreground">
+              {/* <div className="mt-8 text-center text-xs text-muted-foreground">
                 By continuing, you agree to our{' '}
-                <Link href="/terms" className="text-primary hover:underline">
+                <Link
+                  href="/legal"
+                  className="text-primary hover:underline"
+                >
                   Terms of Service
                 </Link>{' '}
                 and{' '}
-                <Link href="/privacy" className="text-primary hover:underline">
+                <Link
+                  href="/legal"
+                  className="text-primary hover:underline"
+                >
                   Privacy Policy
                 </Link>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>

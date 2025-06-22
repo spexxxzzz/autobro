@@ -225,12 +225,12 @@
 }
 
 :root {
-  --background: oklch(98.46% 0.002 247.84);
+  --background: oklch(15.18% 0.0003 0.22);
   --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
+  --card: oklch(1 0 0); /*logout box  */
   --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0); /*logout box  */
+  --popover-foreground: oklch(53.88% 0.0003 359.52);
   --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(54.65% 0.246 262.87);
@@ -261,7 +261,7 @@
 }
 
 .dark {
-  --background: oklch(0.185 0.005 285.823);
+  --background: oklch(15.18% 0.0003 0.22);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.145 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -549,8 +549,8 @@
 
 .bg-pattern-grid {
   background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   background-size: 20px 20px;
 }
 

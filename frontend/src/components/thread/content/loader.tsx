@@ -3,22 +3,22 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 
 const items = [
-    { id: 1, content: "Initializing neural pathways..." },
-    { id: 2, content: "Analyzing query complexity..." },
-    { id: 3, content: "Assembling cognitive framework..." },
-    { id: 4, content: "Orchestrating thought processes..." },
-    { id: 5, content: "Synthesizing contextual understanding..." },
-    { id: 6, content: "Calibrating response parameters..." },
-    { id: 7, content: "Engaging reasoning algorithms..." },
-    { id: 8, content: "Processing semantic structures..." },
-    { id: 9, content: "Formulating strategic approach..." },
-    { id: 10, content: "Optimizing solution pathways..." },
-    { id: 11, content: "Harmonizing data streams..." },
-    { id: 12, content: "Architecting intelligent response..." },
-    { id: 13, content: "Fine-tuning cognitive models..." },
-    { id: 14, content: "Weaving narrative threads..." },
-    { id: 15, content: "Crystallizing insights..." },
-    { id: 16, content: "Preparing comprehensive analysis..." }
+    { id: 1, content: "Booting core systems..." },
+    { id: 2, content: "Parsing your objectives..." },
+    { id: 3, content: "Mapping strategy..." },
+    { id: 4, content: "Selecting the right tools for the job..." },
+    { id: 5, content: "Gathering initial intelligence..." },
+    { id: 6, content: "Formulating a plan of attack..." },
+    { id: 7, content: "Engaging logic processors..." },
+    { id: 8, content: "Connecting data streams..." },
+    { id: 9, content: "Constructing the workflow..." },
+    { id: 10, content: "Running tactical simulations..." },
+    { id: 11, content: "Identifying the critical path..." },
+    { id: 12, content: "Architecting the solution..." },
+    { id: 13, content: "Calibrating execution parameters..." },
+    { id: 14, content: "Preparing for launch..." },
+    { id: 15, content: "Finalizing operational sequence..." },
+    { id: 16, content: "Let's get to work..." }
   ];
 
 export const AgentLoader = () => {
@@ -35,7 +35,7 @@ export const AgentLoader = () => {
 
   return (
     <div className="flex py-2 items-center w-full">
-      <div>✨</div>
+      <div>🖥️</div>
             <AnimatePresence>
             <motion.div
                 key={items[index].id}

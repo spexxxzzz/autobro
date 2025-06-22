@@ -49,7 +49,7 @@ export interface PricingTier {
 }
 
 export const siteConfig = {
-  name: 'Kortix Suna',
+  name: 'AutoBro',
   description: 'The Generalist AI Agent that can act on your behalf.',
   cta: 'Start Free',
   url: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
@@ -100,7 +100,7 @@ export const siteConfig = {
     githubUrl: 'https://github.com/kortix-ai/suna',
     title: 'Suna, the AI Employee.',
     description:
-      'Suna by Kortix – is a generalist AI Agent that acts on your behalf.',
+      'AutoBro – is a generalist AI Agent that acts on your behalf.',
     inputPlaceholder: 'Ask Suna to...',
   },
   cloudPricingItems: [
@@ -380,7 +380,7 @@ export const siteConfig = {
   featureSection: {
     title: 'How Kortix Suna Works',
     description:
-      'Discover how Kortix Suna transforms your commands into action in four easy steps',
+      'Discover how AutoBro transforms your commands into action in four easy steps',
     items: [
       {
         id: 1,
@@ -1092,7 +1092,7 @@ export const siteConfig = {
       },
       {
         id: 6,
-        question: 'How does Kortix Suna save me time?',
+        question: 'How does Kortix Suna save me on mytime?',
         answer:
           'Kortix Suna automates repetitive tasks, streamlines workflows, and provides quick solutions to common challenges. This automation and efficiency can save hours of manual work, allowing you to focus on more strategic activities.',
       },

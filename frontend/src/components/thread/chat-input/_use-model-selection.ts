@@ -8,7 +8,7 @@ import { useAvailableModels } from '@/hooks/react-query/subscriptions/use-model'
 export const STORAGE_KEY_MODEL = 'suna-preferred-model';
 export const STORAGE_KEY_CUSTOM_MODELS = 'customModels';
 export const DEFAULT_FREE_MODEL_ID = 'deepseek';
-export const DEFAULT_PREMIUM_MODEL_ID = 'claude-sonnet-4';
+export const DEFAULT_PREMIUM_MODEL_ID = 'gemini-flash-2.5:thinking';
 
 export type SubscriptionStatus = 'no_subscription' | 'active';
 
@@ -30,12 +30,13 @@ export interface CustomModel {
 // SINGLE SOURCE OF TRUTH for all model data
 export const MODELS = {
   // Premium high-priority models
-  'claude-sonnet-4': { 
+  'gemini-flash-2.5:thinking': {
+    label: 'AB Agent',
     tier: 'premium',
-    priority: 100, 
+    priority: 100,
     recommended: true,
     lowQuality: false,
-    description: 'Claude Sonnet 4 - Anthropic\'s latest and most advanced AI assistant'
+    description: "Gemini Flash 2.5 - Google's fast, responsive AI model"
   },
   'claude-sonnet-3.7': { 
     tier: 'premium', 
@@ -60,7 +61,7 @@ export const MODELS = {
   },
   'gemini-2.5-pro-preview': { 
     tier: 'premium', 
-    priority: 95,
+    priority: 92,
     recommended: true,
     lowQuality: false,
     description: 'Gemini Pro 2.5 - Google\'s latest powerful model with strong reasoning'
@@ -86,12 +87,12 @@ export const MODELS = {
     lowQuality: false,
     description: 'Gemini 2.5 - Google\'s powerful versatile model'
   },
-  'gemini-flash-2.5:thinking': { 
-    tier: 'premium', 
+  'claude-sonnet-4': {
+    tier: 'premium',
     priority: 90,
     recommended: true,
     lowQuality: false,
-    description: 'Gemini Flash 2.5 - Google\'s fast, responsive AI model'
+    description: "Claude Sonnet 4 - Anthropic's latest and most advanced AI assistant"
   },
   'gpt-4o': { 
     tier: 'premium', 
@@ -189,6 +190,9 @@ export const canAccessModel = (
 
 // Helper to format a model name for display
 export const formatModelName = (name: string): string => {
+  if (name === 'gemini-flash-2.5:thinking') {
+    return 'AB Agent';
+  }
   return name
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -276,7 +280,7 @@ export const useModelSelection = () => {
         },
         { 
           id: DEFAULT_PREMIUM_MODEL_ID, 
-          label: 'Claude Sonnet 4', 
+          label: 'AB Agent',
           requiresSubscription: true, 
           description: MODELS[DEFAULT_PREMIUM_MODEL_ID]?.description || MODEL_TIERS.premium.baseDescription,
           priority: MODELS[DEFAULT_PREMIUM_MODEL_ID]?.priority || 100
@@ -296,9 +300,14 @@ export const useModelSelection = () => {
         
         cleanLabel = cleanLabel
           .replace(/-/g, ' ')
+          .replace(/:/g, ' ')
           .split(' ')
           .map(word => word.charAt(0).toUpperCase() + word.slice(1))
           .join(' ');
+        
+        if (shortName === 'gemini-flash-2.5:thinking') {
+          cleanLabel = 'AB Agent';
+        }
         
         // Get model data from our central MODELS constant
         const modelData = MODELS[shortName] || {};

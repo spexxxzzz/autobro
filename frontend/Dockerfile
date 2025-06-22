@@ -1,16 +1,13 @@
-FROM node:20-bullseye-slim
-
+# Using the full Debian bookworm image which has more up-to-date libraries
+# that are more compatible with native modules like 'canvas'.
+FROM node:20-bookworm AS base
 WORKDIR /app
 
-ARG NEXT_PUBLIC_SUPABASE_URL
-ENV NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL
-ARG NEXT_PUBLIC_SUPABASE_ANON_KEY
-ENV NEXT_PUBLIC_SUPABASE_ANON_KEY=$NEXT_PUBLIC_SUPABASE_ANON_KEY
-
-# Copy package files first for better layer caching
+# Dependencies stage
+FROM base AS deps
 COPY package*.json ./
 
-# Install build dependencies for node-gyp
+# Install build dependencies for native modules, in case any packages need them
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 \
     make \
@@ -26,14 +23,30 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 RUN npm install
 
-# Copy the frontend code
+# Builder stage
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-ENV NEXT_PUBLIC_VERCEL_ENV production
+# Pass Supabase keys for the build process
+ARG NEXT_PUBLIC_SUPABASE_URL
+ARG NEXT_PUBLIC_SUPABASE_ANON_KEY
+ENV NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL
+ENV NEXT_PUBLIC_SUPABASE_ANON_KEY=$NEXT_PUBLIC_SUPABASE_ANON_KEY
 
 RUN npm run build
 
+# Production runner stage
+FROM base AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+
 EXPOSE 3000
 
-# Default command is dev, but can be overridden in docker-compose
-CMD ["npm", "start"]
+# The standalone output includes a server.js file
+CMD ["node", "server.js"]

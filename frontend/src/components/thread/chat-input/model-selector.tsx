@@ -105,20 +105,21 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({
   if (isLocalMode()) {
     // Get current custom models from state (not from storage)
     customModels.forEach(model => {
-      // Only add if it doesn't exist or mark it as a custom model if it does
-      if (!modelMap.has(model.id)) {
+      // If a model with the same ID already exists, we just mark it as custom
+      // but we DO NOT overwrite its label or other properties from the main config.
+      if (modelMap.has(model.id)) {
+        const existingModel = modelMap.get(model.id);
+        modelMap.set(model.id, {
+          ...existingModel,
+          isCustom: true,
+        });
+      } else {
+        // Only add it as a new model if it doesn't already exist.
         modelMap.set(model.id, {
           id: model.id,
           label: model.label || formatModelName(model.id),
           requiresSubscription: false,
           top: false,
-          isCustom: true
-        });
-      } else {
-        // If it already exists (rare case), mark it as a custom model
-        const existingModel = modelMap.get(model.id);
-        modelMap.set(model.id, {
-          ...existingModel,
           isCustom: true
         });
       }
@@ -173,7 +174,7 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({
   }, [isOpen]);
 
   const selectedLabel =
-    enhancedModelOptions.find((o) => o.id === selectedModel)?.label || 'Select model';
+    enhancedModelOptions.find((o) => o.id === selectedModel)?.label || 'Select Agent';
 
   const handleSelect = (id: string) => {
     // Check if it's a custom model
@@ -670,7 +671,7 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({
             ) : (
               /* Subscription or other status view */
               <div className='max-h-[320px] overflow-y-auto w-full'>
-                <div className="px-3 py-3 flex justify-between items-center">
+                {/* <div className="px-3 py-3 flex justify-between items-center">
                   <span className="text-xs font-medium text-muted-foreground">All Models</span>
                   {isLocalMode() && (
                     <TooltipProvider>
@@ -694,7 +695,7 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({
                       </Tooltip>
                     </TooltipProvider>
                   )}
-                </div>
+                </div> */}
                 {uniqueModels
                   .filter(m =>
                     m.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -732,7 +733,7 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({
               </div>
             )}
           </div>
-          {!shouldDisplayAll && <div className="px-3 py-2 border-t border-border">
+          {/* {!shouldDisplayAll && <div className="px-3 py-2 border-t border-border">
             <div className="relative flex items-center">
               <Search className="absolute left-2.5 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
               <input
@@ -745,7 +746,7 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({
                 className="w-full h-8 px-8 py-1 rounded-lg text-sm focus:outline-none bg-muted"
               />
             </div>
-          </div>}
+          </div>} */}
         </DropdownMenuContent>
       </DropdownMenu>
 

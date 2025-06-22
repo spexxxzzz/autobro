@@ -179,6 +179,8 @@ interface FileUploadHandlerProps {
   setUploadedFiles: React.Dispatch<React.SetStateAction<UploadedFile[]>>;
   setIsUploading: React.Dispatch<React.SetStateAction<boolean>>;
   messages?: any[]; // Add messages prop
+  fileCount: number;
+  maxFiles: number;
 }
 
 export const FileUploadHandler = forwardRef<
@@ -196,6 +198,8 @@ export const FileUploadHandler = forwardRef<
       setUploadedFiles,
       setIsUploading,
       messages = [],
+      fileCount,
+      maxFiles,
     },
     ref,
   ) => {
@@ -227,9 +231,25 @@ export const FileUploadHandler = forwardRef<
       if (!event.target.files || event.target.files.length === 0) return;
 
       const files = Array.from(event.target.files);
-      // Use the helper function instead of the static method
+      const remainingSlots = maxFiles - fileCount;
+
+      if (remainingSlots <= 0) {
+        toast.error('File limit reached', {
+          description: `You can only attach a maximum of ${maxFiles} files.`,
+        });
+        return;
+      }
+
+      let filesToUpload = files;
+      if (files.length > remainingSlots) {
+        toast.warning('Some files were not added', {
+          description: `You tried to add ${files.length} files, but only ${remainingSlots} could be added to stay within the ${maxFiles} file limit.`,
+        });
+        filesToUpload = files.slice(0, remainingSlots);
+      }
+
       handleFiles(
-        files,
+        filesToUpload,
         sandboxId,
         setPendingFiles,
         setUploadedFiles,
@@ -250,10 +270,10 @@ export const FileUploadHandler = forwardRef<
                 type="button"
                 onClick={handleFileUpload}
                 variant="ghost"
-                size="default"
-                className="h-7 rounded-md text-muted-foreground"
+                size="icon"
+                className="h-7 w-7"
                 disabled={
-                  loading || (disabled && !isAgentRunning) || isUploading
+                  loading || (disabled && !isAgentRunning) || isUploading || fileCount >= maxFiles
                 }
               >
                 {isUploading ? (
@@ -261,10 +281,9 @@ export const FileUploadHandler = forwardRef<
                 ) : (
                   <Paperclip className="h-4 w-4" />
                 )}
-                <span className="text-sm sm:block hidden">Attachments</span>
               </Button>
             </TooltipTrigger>
-            <TooltipContent side="top">
+            <TooltipContent>
               <p>Attach files</p>
             </TooltipContent>
           </Tooltip>
@@ -273,9 +292,9 @@ export const FileUploadHandler = forwardRef<
         <input
           type="file"
           ref={ref}
-          className="hidden"
-          onChange={processFileUpload}
           multiple
+          onChange={processFileUpload}
+          className="hidden"
         />
       </>
     );
