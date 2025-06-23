@@ -13,8 +13,6 @@ import { getAgentAvatar } from '../agents/_utils/get-agent-style';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Pagination } from '../agents/_components/pagination';
 
-export const dynamic = 'force-dynamic';
-
 type SortOption = 'newest' | 'popular' | 'most_downloaded' | 'name';
 
 export default function MarketplacePage() {
