@@ -374,7 +374,7 @@ function LoginContent() {
               <p className="text-base md:text-lg text-center text-muted-foreground font-medium text-balance leading-relaxed tracking-tight mt-2 mb-6">
                 {isSignUp
                   ? 'Create your account and start working with AutoBro'
-                  : 'Sign in to your account to continue'}
+                  : 'Sign in to your account to continue working with AutoBro'}
               </p>
             </div>
           </div>
