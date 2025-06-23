@@ -15,6 +15,8 @@ import { DeleteOperationProvider } from '@/contexts/DeleteOperationContext';
 import { StatusOverlay } from '@/components/ui/status-overlay';
 import { VSentry } from '@/components/sentry';
 
+export const dynamic = 'force-dynamic';
+
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
