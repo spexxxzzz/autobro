@@ -24,6 +24,17 @@ export const validateSession = async (request: NextRequest) => {
       },
     });
 
+    // Check for a crawler user-agent to allow social media cards to be generated
+    const userAgent = request.headers.get('user-agent') || '';
+    const isCrawler = /(bot|slurp|crawler|spider|facebook|twitter|slack)/i.test(
+      userAgent,
+    );
+
+    // If it's a crawler on the root page, let it pass to read meta tags
+    if (isCrawler && request.nextUrl.pathname === '/') {
+      return response;
+    }
+
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -80,11 +91,16 @@ export const validateSession = async (request: NextRequest) => {
 
     const protectedRoutes = ['/dashboard', '/invitation'];
 
+    // For regular users, protect the dashboard and invitation routes
     if (
       !user &&
       protectedRoutes.some((path) => request.nextUrl.pathname.startsWith(path))
     ) {
-      // redirect to /auth
+      return forceLoginWithReturn(request);
+    }
+
+    // For regular users, also protect the root path and redirect to /auth
+    if (!user && request.nextUrl.pathname === '/') {
       return forceLoginWithReturn(request);
     }
 
