@@ -26,6 +26,7 @@ export const validateSession = async (request: NextRequest) => {
 
     // Check for a crawler user-agent to allow social media cards to be generated
     const userAgent = request.headers.get('user-agent') || '';
+    console.log('Validating session for User-Agent:', userAgent); // DEBUG LOG
     const isCrawler = /(bot|slurp|crawler|spider|facebook|twitter|slack)/i.test(
       userAgent,
     );
